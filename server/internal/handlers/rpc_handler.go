@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"rpc-server/internal/models"
 	"rpc-server/internal/services"
 )
@@ -16,8 +17,15 @@ type RPCServer struct {
 
 // Start関数でRPCサーバーを起動
 func (server *RPCServer) Start() {
+	socketPath := "/tmp/unix_socket"
+
+	// 既存のソケットファイルを削除
+	if err := os.RemoveAll(socketPath); err != nil {
+		log.Fatal("Error removing socket file: ", err)
+	}
+
 	var error error
-	server.listener, error = net.Listen("unix", "/tmp/unix_socket")
+	server.listener, error = net.Listen("unix", socketPath)
 	if error != nil {
 		log.Fatal("Error starting RPC server: ", error)
 	}
