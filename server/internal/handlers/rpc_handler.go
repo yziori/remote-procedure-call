@@ -62,5 +62,7 @@ func (server *RPCServer) handleConnection(conn net.Conn) {
 	switch req.Method {
 	case "floor":
 		res = services.Floor(req)
+	case "nroot":
+		res = services.Nroot(req)
 	}
 }
