@@ -24,6 +24,28 @@ func TestReverse(t *testing.T) {
 				Error:      "",
 			},
 		},
+		{
+			name: "valid parameter type",
+			req: models.Request{
+				ID:     1,
+				Params: []interface{}{1.3},
+			},
+			expect: models.Response{
+				ID:    1,
+				Error: "Invalid parameter type",
+			},
+		},
+		{
+			name: "valid parameter count",
+			req: models.Request{
+				ID:     1,
+				Params: []interface{}{"あいうえお", "アイウエオ"},
+			},
+			expect: models.Response{
+				ID:    1,
+				Error: "Invalid parameter count",
+			},
+		},
 	}
 
 	for _, tc := range tests {
