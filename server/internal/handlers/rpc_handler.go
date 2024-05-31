@@ -64,5 +64,14 @@ func (server *RPCServer) handleConnection(conn net.Conn) {
 		res = services.Floor(req)
 	case "nroot":
 		res = services.Nroot(req)
+	case "reverse":
+		res = services.Reverse(req)
+	default:
+		res.Error = "Unknown method"
+	}
+
+	encoder := json.NewEncoder(conn)
+	if err := encoder.Encode(&res); err != nil {
+		log.Println("Error encoding response:", err)
 	}
 }
