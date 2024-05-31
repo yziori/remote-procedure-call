@@ -2,6 +2,7 @@ package services
 
 import (
 	"rpc-server/internal/models"
+	"rpc-server/internal/testutils"
 	"testing"
 )
 
@@ -51,16 +52,7 @@ func TestFloor(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			result := Floor(tc.req)
-			if result.ID != tc.expect.ID || result.ResultType != tc.expect.ResultType || result.Error != tc.expect.Error {
-				t.Errorf("unexpected result for test %s: got %v, want %v", tc.name, result, tc.expect)
-			}
-			if r, ok := result.Result.(float64); ok {
-				if r != tc.expect.Result {
-					t.Errorf("unexpected result for test %s: got %v, want %v", tc.name, r, tc.expect.Result)
-				}
-			} else if result.Result != tc.expect.Result {
-				t.Errorf("unexpected result for test %s: got %v, want %v", tc.name, result.Result, tc.expect.Result)
-			}
+			testutils.CheckResponse(t, tc.name, result, tc.expect)
 		})
 	}
 }
