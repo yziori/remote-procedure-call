@@ -1,12 +1,14 @@
+export type ParamType = number | string;
+
 export interface Request {
 	method: string;
-	params: any[];
+	params: ParamType[];
 	param_types: string[];
 	id: number;
 }
 
 export interface Response {
-	result: any;
+	result: ParamType | ParamType[] | boolean;
 	result_type: string;
 	id: number;
 	error: string;
