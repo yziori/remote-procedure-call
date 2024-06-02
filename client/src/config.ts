@@ -1,5 +1,5 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 
-export function getUnixSocketPath():string {
-    return resolve('/tmp/unix_socket')
+export function getUnixSocketPath(): string {
+	return resolve("/tmp/unix_socket");
 }
