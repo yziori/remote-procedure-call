@@ -20,7 +20,11 @@ async function main(): Promise<void> {
 		if (request) {
 			try {
 				const response = await sendRequest(request);
-				console.log(response.result);
+				if (!response.error) {
+					console.log("Response:", response.result);
+				} else {
+					console.error("Error in response:", response.error);
+				}
 			} catch (error) {
 				console.error("Error:", error);
 			}
