@@ -1,7 +1,7 @@
 export interface Request {
 	method: string;
 	params: any[];
-	param_type: string[];
+	param_types: string[];
 	id: number;
 }
 
