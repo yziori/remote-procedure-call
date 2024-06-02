@@ -27,6 +27,28 @@ func TestSort(t *testing.T) {
 				Error:      "",
 			},
 		},
+		{
+			name: "valid param count",
+			req: models.Request{
+				ID:     1,
+				Params: []interface{}{"banana", "apple"},
+			},
+			expect: models.Response{
+				ID:    1,
+				Error: "Invalid parameter count",
+			},
+		},
+		{
+			name: "valid param type",
+			req: models.Request{
+				ID:     1,
+				Params: []interface{}{3.14},
+			},
+			expect: models.Response{
+				ID:    1,
+				Error: "Invalid parameter type",
+			},
+		},
 	}
 
 	for _, tc := range tests {
