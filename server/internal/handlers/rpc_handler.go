@@ -66,6 +66,10 @@ func (server *RPCServer) handleConnection(conn net.Conn) {
 		res = services.Nroot(req)
 	case "reverse":
 		res = services.Reverse(req)
+	case "validAnagram":
+		res = services.ValidAnagram(req)
+	case "sort":
+		res = services.Sort(req)
 	default:
 		res.Error = "Unknown method"
 	}
