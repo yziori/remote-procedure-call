@@ -17,8 +17,23 @@ server/
 │   │   └── response.go
 │   └── services/             # ビジネスロジックを含むサービスを定義するディレクトリ
 │       └── methods.go
-├── Dockerfile
 └── go.mod
+
+client/
+├── biome.json
+├── bun.lockb
+├── package.json
+├── src/
+│   ├── __tests__/
+│   │   ├── client.test.ts
+│   │   └── utils.test.ts
+│   ├── client.ts             # サーバーとの通信ロジック
+│   ├── config.ts             # 設定関連
+│   ├── index.ts              # エントリーポイント
+│   ├── models.ts             # データモデル
+│   ├── requestHandler.ts     # リクエストの処理ロジック
+│   └── utils.ts              # ユーティリティ関数
+└── tsconfig.json
 
 ```
 
@@ -57,3 +72,57 @@ server/
 | **reverse(string s)**                      | 文字列 s を入力として受け取り、入力文字列の逆である新しい文字列を返す。                                  | `string`    |
 | **validAnagram(string str1, string str2)** | 2 つの文字列を入力として受け取り、2 つの入力文字列が互いにアナグラムであるかどうかを示すブール値を返す。 | `bool`      |
 | **sort(string[] strArr)**                  | 文字列の配列を入力として受け取り、その配列をソートして、ソート後の文字列の配列を返す。                   | `string[]`  |
+
+## Execution Instructions
+
+サーバーとクライアントの両方を起動する手順は以下の通り。
+
+### Prerequisites
+
+1. Go 言語のインストール
+
+   - 動作確認済みバージョン: 1.21+
+   - インストール手順: https://go.dev/doc/install
+
+2. Bun のインストール
+
+   - 動作確認済みバージョン: 1.1.12+
+   - インストール手順: https://bun.sh/docs/installation
+
+3. Unix 系 OS
+
+   - 本プロジェクトは Unix domain socket を使用するため、Unix 系 OS（例: Linux, macOS）が必要。
+
+### Starting the Server
+
+```bash
+$ cd server
+$ go run cmd/server/main.go
+```
+
+### Starting the Client
+
+```bash
+$ cd client
+$ bun install
+$ bun run src/index.ts
+```
+
+## Usage
+
+1. サーバーの起動: 上記の手順に従ってサーバーを起動する。
+1. クライアントの起動: 上記の手順に従ってクライアントを起動する。
+1. リクエストの送信:
+   - プロンプトが表示されたら、メソッドとパラメータを入力する。
+
+```bash
+$ Enter method and parameters: floor 10.7
+```
+
+4. レスポンスの受信:
+   - サーバーはリクエストを処理し、レスポンスを返す。
+   - クライアントはレスポンスを受信し、表示する。
+
+```bash
+$ Response: 10
+```
